@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#050709"/>
+      <stop offset="30%" style="stop-color:#0c0e12"/>
+      <stop offset="100%" style="stop-color:#12151b"/>
+    </linearGradient>
+    <linearGradient id="accent-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00D9FF"/>
+      <stop offset="100%" style="stop-color:#A855F7"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Fond -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Grille de fond -->
+  <defs>
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+
+  <!-- Cercle décoratif flou haut-droite -->
+  <circle cx="1050" cy="100" r="300" fill="none" stroke="rgba(0,217,255,0.08)" stroke-width="1"/>
+  <circle cx="1050" cy="100" r="200" fill="none" stroke="rgba(168,85,247,0.06)" stroke-width="1"/>
+  <circle cx="150"  cy="530" r="200" fill="none" stroke="rgba(0,217,255,0.05)" stroke-width="1"/>
+
+  <!-- Ligne accent en haut -->
+  <rect x="0" y="0" width="1200" height="2" fill="url(#accent-grad)" opacity="0.8"/>
+
+  <!-- Badge disponible -->
+  <rect x="80" y="80" width="200" height="30" rx="15" fill="none" stroke="rgba(0,217,255,0.3)" stroke-width="1"/>
+  <circle cx="100" cy="95" r="4" fill="#00D9FF"/>
+  <text x="115" y="100" font-family="monospace" font-size="12" fill="rgba(0,217,255,0.8)" letter-spacing="1">AVAILABLE FOR WORK</text>
+
+  <!-- Nom principal -->
+  <text x="80" y="220"
+    font-family="system-ui, -apple-system, sans-serif"
+    font-weight="800" font-size="82"
+    letter-spacing="-2"
+    fill="white"
+    opacity="0.95"
+  >Mohamed Attahir</text>
+
+  <!-- Titre accent -->
+  <text x="82" y="295"
+    font-family="system-ui, -apple-system, sans-serif"
+    font-weight="700" font-size="38"
+    letter-spacing="0"
+    fill="url(#accent-grad)"
+  >Développeur Frontend</text>
+
+  <!-- Description -->
+  <text x="82" y="370"
+    font-family="monospace"
+    font-size="20"
+    fill="rgba(255,255,255,0.45)"
+    letter-spacing="0.5"
+  >HTML · CSS · JavaScript · React · Niamey, Niger</text>
+
+  <!-- Séparateur -->
+  <rect x="82" y="410" width="60" height="1" fill="url(#accent-grad)" opacity="0.6"/>
+
+  <!-- URL -->
+  <text x="82" y="445"
+    font-family="monospace"
+    font-size="16"
+    fill="rgba(0,217,255,0.5)"
+    letter-spacing="1"
+  >mohamedattahir.dev</text>
+
+  <!-- Initiales MA à droite — grand -->
+  <text x="980" y="420"
+    text-anchor="middle"
+    font-family="system-ui, -apple-system, sans-serif"
+    font-weight="800"
+    font-size="260"
+    letter-spacing="-8"
+    fill="none"
+    stroke="url(#accent-grad)"
+    stroke-width="1"
+    opacity="0.12"
+  >MA</text>
+
+  <!-- Coins décoratifs -->
+  <!-- tl -->
+  <path d="M 40 40 L 40 56 M 40 40 L 56 40" stroke="rgba(0,217,255,0.4)" stroke-width="1.5" fill="none"/>
+  <!-- tr -->
+  <path d="M 1160 40 L 1160 56 M 1160 40 L 1144 40" stroke="rgba(0,217,255,0.4)" stroke-width="1.5" fill="none"/>
+  <!-- bl -->
+  <path d="M 40 590 L 40 574 M 40 590 L 56 590" stroke="rgba(0,217,255,0.4)" stroke-width="1.5" fill="none"/>
+  <!-- br -->
+  <path d="M 1160 590 L 1160 574 M 1160 590 L 1144 590" stroke="rgba(0,217,255,0.4)" stroke-width="1.5" fill="none"/>
+
+  <!-- Ligne bas -->
+  <rect x="0" y="628" width="1200" height="2" fill="url(#accent-grad)" opacity="0.3"/>
+</svg>
