@@ -1,6 +1,8 @@
 import TypedText from "../components/TypedText";
+import { useLang } from "../i18n";
 
 export default function Hero() {
+  const { t } = useLang();
   return (
     <section id="home">
       {/* Decorative rings */}
@@ -9,11 +11,11 @@ export default function Hero() {
 
       <div className="hero-eyebrow">
         <span />
-        Available for work
+        {t("hero.available")}
       </div>
 
       <h1 className="hero-name">
-        <div>Hello, I'm</div>
+        <div>{t("hero.hello")}</div>
         <div>
           <span className="accent-word">Mohamed</span>
         </div>
@@ -21,8 +23,7 @@ export default function Hero() {
       </h1>
 
       <p className="hero-sub">
-        I build <strong>beautiful, performant</strong> digital products that live at the intersection of design and engineering.
-        Specializing in{" "}
+        {t("hero.sub1")}<strong>{t("hero.sub2")}</strong>{t("hero.sub3")}{" "}
         <TypedText words={["HTML / CSS", "JavaScript", "React"]} />
       </p>
 
@@ -31,13 +32,13 @@ export default function Hero() {
           className="btn-primary"
           onClick={() => document.getElementById("projects").scrollIntoView({ behavior: "smooth" })}
         >
-          Voir mes projets
+          {t("hero.projects")}
         </button>
         <button
           className="btn-ghost"
           onClick={() => document.getElementById("contact").scrollIntoView({ behavior: "smooth" })}
         >
-          Me contacter
+          {t("hero.contact")}
         </button>
 
         {/* Bouton CV — pointe vers public/CV.pdf */}
@@ -45,20 +46,20 @@ export default function Hero() {
           className="btn-cv"
           href="/CV.pdf"
           download="CV_Mohamed_Attahir_Diallo.pdf"
-          title="Télécharger mon CV"
+          title={t("hero.cvTitle")}
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
             <polyline points="7 10 12 15 17 10"/>
             <line x1="12" y1="15" x2="12" y2="3"/>
           </svg>
-          Télécharger CV
+          {t("hero.cv")}
         </a>
       </div>
 
       <div className="hero-scroll">
         <div className="scroll-line" />
-        Scroll to explore
+        {t("hero.scroll")}
       </div>
     </section>
   );

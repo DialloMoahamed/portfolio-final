@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
+import { useLang } from "../i18n";
 
 export default function Loader({ onDone }) {
+  const { t } = useLang();
   const [phase, setPhase] = useState("in"); // in → hold → out
 
   useEffect(() => {
@@ -26,7 +28,7 @@ export default function Loader({ onDone }) {
           <div className="loader-bar-track">
             <div className="loader-bar-fill" />
           </div>
-          <span className="loader-bar-label">Chargement…</span>
+          <span className="loader-bar-label">{t("loader.loading")}</span>
         </div>
       </div>
 

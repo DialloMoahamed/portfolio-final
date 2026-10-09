@@ -1,24 +1,45 @@
 import { useState, useRef } from "react";
+import emailjs from "@emailjs/browser";
 import useInView from "../hooks/useInView";
+import { useLang } from "../i18n";
 
 // ─── CONFIGURATION EMAILJS ───────────────────────────────────────────────────
-// Remplace ces valeurs par tes propres clés EmailJS :
-// 1. Crée un compte sur https://www.emailjs.com/
-// 2. Ajoute un "Email Service" (Gmail) → copie le Service ID
-// 3. Crée un "Email Template" → copie le Template ID
-// 4. Va dans Account > API Keys → copie ta Public Key
-const EMAILJS_SERVICE_ID  = "service_2fc66vn";
-const EMAILJS_TEMPLATE_ID = "k1hodw9";
-const EMAILJS_PUBLIC_KEY  = "W0QvLbGOavk1E1P2c";
+// Les identifiants se règlent dans un fichier .env (voir .env.example) ou, sur
+// Vercel/Netlify, dans les variables d'environnement du projet.
+// Valeurs de repli = celles qui étaient déjà dans le code.
+const EMAILJS_SERVICE_ID  = import.meta.env.VITE_EMAILJS_SERVICE_ID  || "service_2fc66vn";
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "k1hodw9";
+const EMAILJS_PUBLIC_KEY  = import.meta.env.VITE_EMAILJS_PUBLIC_KEY  || "W0QvLbGOavk1E1P2c";
+const CONTACT_EMAIL = "mohamedattahirdiallo@gmail.com";
+
+// Réseaux affichés : ajoute une entrée avec un vrai lien pour qu'elle apparaisse.
+const SOCIALS = [
+  { icon: "⌥", label: "GitHub", href: "https://github.com/DialloMoahamed" },
+  { icon: "✉", label: CONTACT_EMAIL, href: `mailto:${CONTACT_EMAIL}` },
+];
+
+// Traduit une erreur EmailJS en message lisible
+function explainError(err) {
+  const status = err?.status;
+  const text = err?.text || err?.message || "";
+  if (status === 400 || status === 412) return `Configuration EmailJS invalide (${status}) : ${text}`;
+  if (status === 403) return "Ce domaine n'est pas autorisé dans EmailJS (Account → Security).";
+  if (status === 429) return "Trop de messages envoyés. Réessaie dans quelques minutes.";
+  if (!status) return "Connexion impossible. Vérifie ta connexion Internet.";
+  return `Erreur ${status} : ${text}`;
+}
 // ─────────────────────────────────────────────────────────────────────────────
 
 export default function Contact() {
+  const { t } = useLang();
   const [contactRef, contactVisible] = useInView();
   const formRef = useRef(null);
 
   const [fields, setFields] = useState({ name: "", email: "", subject: "", message: "" });
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState("idle"); // idle | sending | success | error
+  const [errorDetail, setErrorDetail] = useState("");
+  const [honeypot, setHoneypot] = useState("");
 
   const validate = () => {
     const e = {};
@@ -38,31 +59,44 @@ export default function Contact() {
   };
 
   const handleSubmit = async () => {
+    if (status === "sending") return;
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) { setErrors(validationErrors); return; }
+    // Anti-spam : un robot remplit le champ caché, un humain non → on fait semblant d'envoyer
+    if (honeypot) { setStatus("success"); return; }
+
     setStatus("sending");
     try {
-      const result = await window.emailjs.send(
+      await emailjs.send(
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
-        { from_name: fields.name, from_email: fields.email, subject: fields.subject, message: fields.message, to_name: "Mohamed Attahir", reply_to: fields.email },
-        EMAILJS_PUBLIC_KEY
+        {
+          // Variables du template : on envoie les deux conventions courantes
+          from_name: fields.name, from_email: fields.email, subject: fields.subject, message: fields.message,
+          name: fields.name, email: fields.email, title: fields.subject,
+          to_name: "Mohamed Attahir", reply_to: fields.email,
+        },
+        { publicKey: EMAILJS_PUBLIC_KEY }
       );
-      if (result.status === 200) { setStatus("success"); setFields({ name: "", email: "", subject: "", message: "" }); }
-      else setStatus("error");
-    } catch (err) { console.error("EmailJS error:", err); setStatus("error"); }
+      setStatus("success");
+      setFields({ name: "", email: "", subject: "", message: "" });
+    } catch (err) {
+      console.error("EmailJS error:", err);
+      setErrorDetail(explainError(err));
+      setStatus("error");
+    }
   };
 
-  const handleReset = () => { setStatus("idle"); setErrors({}); };
+  const handleReset = () => { setStatus("idle"); setErrors({}); setErrorDetail(""); };
 
   return (
     <section id="contact" ref={contactRef}>
       <div className="contact-inner">
 
         <div className={`fade-in${contactVisible ? " visible" : ""}`}>
-          <div className="section-tag">Contact</div>
+          <div className="section-tag">{t("contact.tag")}</div>
           <h2 className="section-title">
-            Let's build something <span style={{ color: "var(--accent)" }}>great</span>
+            {t("contact.title1")} <span style={{ color: "var(--accent)" }}>{t("contact.title2")}</span>
           </h2>
         </div>
 
@@ -84,8 +118,9 @@ export default function Contact() {
             <span className="contact-error-icon">⚠</span>
             <div>
               <strong>L'envoi a échoué.</strong><br />
+              {errorDetail && <span style={{ color: "var(--muted)", fontSize: 12 }}>{errorDetail}<br /></span>}
               <span style={{ color: "var(--muted)", fontSize: 13 }}>
-                Écris-moi directement à <a href="mailto:mohamedattahirdiallo@gmail.com" style={{ color: "var(--accent)" }}>mohamedattahirdiallo@gmail.com</a>
+                Écris-moi directement à <a href={`mailto:${CONTACT_EMAIL}`} style={{ color: "var(--accent)" }}>{CONTACT_EMAIL}</a>
               </span>
             </div>
             <button className="btn-ghost" style={{ marginLeft: "auto" }} onClick={handleReset}>Réessayer</button>
@@ -94,6 +129,7 @@ export default function Contact() {
 
         {(status === "idle" || status === "sending") && (
           <div ref={formRef} className={`contact-form fade-in delay-2${contactVisible ? " visible" : ""}`}>
+            <input className="form-honeypot" type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" value={honeypot} onChange={(e) => setHoneypot(e.target.value)} />
             <div className="form-row">
               <div className="form-group">
                 <label className="form-label">Nom <span style={{ color: "var(--accent)" }}>*</span></label>
@@ -128,12 +164,7 @@ export default function Contact() {
         )}
 
         <div className={`contact-links fade-in delay-3${contactVisible ? " visible" : ""}`}>
-          {[
-            { icon: "⌥", label: "GitHub", href: "https://github.com/DialloMoahamed" },
-            { icon: "◈", label: "LinkedIn", href: "#" },
-            { icon: "◉", label: "Twitter / X", href: "#" },
-            { icon: "✉", label: "mohamedattahirdiallo@gmail.com", href: "mailto:mohamedattahirdiallo@gmail.com" },
-          ].map((s) => (
+          {SOCIALS.map((s) => (
             <a className="social-link" href={s.href} key={s.label} target={s.href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer">
               <span className="social-icon">{s.icon}</span>
               {s.label}

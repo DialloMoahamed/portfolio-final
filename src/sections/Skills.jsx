@@ -1,17 +1,19 @@
 import { SKILLS } from "../data/skills";
 import SkillBar from "../components/SkillBar";
 import useInView from "../hooks/useInView";
+import { useLang } from "../i18n";
 
 export default function Skills() {
+  const { t } = useLang();
   const [skillsRef, skillsVisible] = useInView();
 
   return (
     <section id="skills" style={{ minHeight: "auto" }}>
             <div ref={skillsRef}>
               <div className={`fade-in${skillsVisible ? " visible" : ""}`}>
-                <div className="section-tag">Expertise</div>
+                <div className="section-tag">{t("skills.tag")}</div>
                 <h2 className="section-title">
-                  Tools &amp; <span style={{ color: "var(--accent)" }}>Technologies</span>
+                  {t("skills.title1")} <span style={{ color: "var(--accent)" }}>{t("skills.title2")}</span>
                 </h2>
               </div>
               <div className="skills-grid">

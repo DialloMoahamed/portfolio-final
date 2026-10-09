@@ -1,0 +1,109 @@
+diff --git a/README.md b/README.md
+index 7df5fe0..406780c 100644
+--- a/README.md
++++ b/README.md
+@@ -94,7 +94,7 @@ portfolio-final/
+ ├── public/
+ │   ├── favicon.svg         # Favicon avec initiales MA
+ │   ├── og-image.png        # Image Open Graph (1200×630)
+-│   └── CV.pdf              # ← Ajoute ton CV ici
++│   └── CV.pdf              # CV téléchargé par le bouton « Télécharger CV »
+ ├── src/
+ │   ├── components/
+ │   │   ├── Cursor.jsx      # Curseur personnalisé
+diff --git a/public/CV.pdf b/public/CV.pdf
+new file mode 100644
+index 0000000..2348242
+--- /dev/null
++++ b/public/CV.pdf
+@@ -0,0 +1,74 @@
++%PDF-1.4
++%���� ReportLab Generated PDF document (opensource)
++1 0 obj
++<<
++/F1 2 0 R /F2 3 0 R
++>>
++endobj
++2 0 obj
++<<
++/BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font
++>>
++endobj
++3 0 obj
++<<
++/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
++>>
++endobj
++4 0 obj
++<<
++/Contents 8 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 7 0 R /Resources <<
++/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
++>> /Rotate 0 /Trans <<
++
++>> 
++  /Type /Page
++>>
++endobj
++5 0 obj
++<<
++/PageMode /UseNone /Pages 7 0 R /Type /Catalog
++>>
++endobj
++6 0 obj
++<<
++/Author (Mohamed Attahir Diallo) /CreationDate (D:20261009102154+00'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20261009102154+00'00') /Producer (ReportLab PDF Library - \(opensource\)) 
++  /Subject (\(unspecified\)) /Title (CV - Mohamed Attahir Diallo) /Trapped /False
++>>
++endobj
++7 0 obj
++<<
++/Count 1 /Kids [ 4 0 R ] /Type /Pages
++>>
++endobj
++8 0 obj
++<<
++/Filter [ /ASCII85Decode /FlateDecode ] /Length 2234
++>>
++stream
++Gatm<flGh*'Rf^Wgp\[PRc2!AWK(dBcGW@,2<f5T!`>$fQ\u3&Fu.U.mfBA@N\![tjFr1N!d?a#g^C^Si7Bj<X<;gJUc7Hh\K23Xj9Bcm_bYA44Sn6^FopRoA$VZX$'U$Yf*d4qjQrh`g=T'bd.($Ae'RgJ0I#-AD*J=?P+8Da*B@Y#AB2F`=YC,!fC=Ic,2WkM2iPYn+t/%M4DiU=#`h;(Le8Ft@GY9l&;7J6#1u%5I62Tl4Ao#EZFXNLT?rEmlqU)4'eI\3f/1.<iGX#Ik`pfrRWRUQA,`fT@a>Mc-T,p>7t0Ycn@Y49GpDQ(+4GM!kJm\DZG/K\m)2UCk[l2kkbWhGSg6"*/NYhaSX3%Z?/&(Yf8.-RYje,N=(9/q&cILbU,AFJ<_n\%^X!66E]^=Z`BuGTm[CDPGgj7cZ=7EK8)MXKr.atpFm[,*&g.Cf^Q32$@0ZfB[?<RqYUODEW\*Pmgg6U[I!R"%H!s9ZHRiM9on[6E5*^HkhVcMLJjLih_^J.I-)\T19nUNIesj7B)e+Zk7S]Hr./I]lD&VGJ5SS(&lkUh[rqs,(J4BTIb\B:4,<p-\)5V[T=]Jo\Y!btt?5&gSF-/1'W_uX>N7WAL>aa?S:q5fhjqTf"nV*<%o!oIB*\.jL(9#5hYk2RHdOYBl[s<*OQ/\Ejlg=:Ff*s"P>Ner.'cW'9.'9DTP$DX"c@k6onRF[\E1(.9T?6m2RrOo]^1*hp7[[F)HmSO>YoQ%;;`Nm$H6:fB)e;jjeXPO,3H'[VM/h&oR*gACHFKDU$4,eo.f6s"TUKg.7^'5n>)4RAQW'1fj(U!2nK8Ki2D_?O8&,;=W7fh%"^_uZN8sV02b33+!mj'EK8KP(rUF\`TUX\oX8^)_aWH$#J8iiBSV&.,:H:Y#n0Pk5!'FusDX89H]K[@^aR`lPadM/;8g=6:`Wf_i/qJY:rl%OWbOMP3bD]d-fEm(%=5RCOP<j_6"2.&,'CL$l>tPn/[ct:i<!st0cMj@:,T'd8)gpLnFi#Q^K-8rOZbc59EO&>\.[jV!A"?H;5<u[>"`h1\B=PYZ?XgB0*g`.,nNTL^i<jZl2lGgSZ#S#]Ul;,`7]`Rt)'uV$c9s2<Jomtg+YY4sM#n_c\k@V@Ih9#d^g'g?Rah5o5.jO4Q)p$f0e7CrDn_gM8IM*-FN&!%n!L-6!.+sk#K]0R]FD@=L,[U@4P,2Zr;rr+m`TnAo*3pP=]N'M$[5FuIo8`G"PP_5@Z5h"MK2&^_8)dLT%u-#l5_\`R0>hB`i[eY*/ZW%7+9kk)\63)CCl&t!?/"k7^uC7bT\@$iU,0!%@&5bk[Go0IMCi]ZL!-TA0Ss\[UR>"0(<kT4m_#8+4M[%E2YfL`YWTFc/h>0HDm]N155h)hHX+UYUIZuS?WIf"_l=`pK%C&.\P]ZZjdco+*UO*9(jYJ06(9i.@+&A"rb]g.C_4-.9NQZ4O\kbng\-W5!<f$NGb]f>HN1iY`-:YTqSn*.'Y@n'VZ;LC,+C"8ub3&!^s/HmN/V_=Us9kI)Wu9Y)E:[=nDsqp5\>D6MHR1o`LPE+]94u!e^ol."NjJ8[O>FKNmCBoq=[ZaQf=Xjemm8V]UY[T<+?3ekM](n#B"E+O#%+aRp$J;3tNOH*qNa/^mTMCZJa4Q"9rUTbCbYd6`#]K+,1F#A"*T9.]$t_\)K='*d9glh*MZf&W_'Z5(H8?VYc0NfR,_0/o6rlcYc[n%-ECX8^d[(SUBX)b]'!4-\iogRXP7ZNcD7D:#Q2\'r%5OgeJRA6#X>0^r*b\5$k\DA;LlFVA\a**D2!q[2.RNc#m;re,@Xj(#.`#5@Y=SFmBT1[Q^A5uqRM;XTT/\$l^6T%e)!;4n]<368;'eP(!>D@>&hN^6,S`\5s?\@@G=p6>=\@0o1!QOh?nU+`B/T;#r^noud!"l%Dco@>/iR0LDu-g0*jQRB\/lRN7:rn6].ir#Nh-?e>`-gePK3Y8cFC%ho4]MlENZTTM^)nBs)b]rsoc!>.n$q^aB0C@>/ADNVJG1(Z`UO->=C8MMlUSGZAb)#Be^Xo&=\3=q@NupI7MrN%ZY-#\4fA3[dm3b%OQ(2W2qlH0o[]MQN:@_O6EUGJV0u5iIkQ>OlACFT,:#EU[OI"-c>CmYS+ca@O;qVk,ag+"%4$Ib'3+jXf=Dm3"qHbrQpS<,RWMKMoli,0Y9]^c&FEXdI(@@e!`s>^XmAhhi4cc)-\EQXFH7M&Q+$0GXm/~>endstream
++endobj
++xref
++0 9
++0000000000 65535 f 
++0000000061 00000 n 
++0000000102 00000 n 
++0000000209 00000 n 
++0000000321 00000 n 
++0000000524 00000 n 
++0000000592 00000 n 
++0000000895 00000 n 
++0000000954 00000 n 
++trailer
++<<
++/ID 
++[<2e1ed1493b2ae812efc0cad4ee207744><2e1ed1493b2ae812efc0cad4ee207744>]
++% ReportLab generated PDF document -- digest (opensource)
++
++/Info 6 0 R
++/Root 5 0 R
++/Size 9
++>>
++startxref
++3279
++%%EOF
+diff --git a/public/CV_placeholder.txt b/public/CV_placeholder.txt
+deleted file mode 100644
+index 23b0aae..0000000
+--- a/public/CV_placeholder.txt
++++ /dev/null
+@@ -1,10 +0,0 @@
+-⚠️ REMPLACE CE FICHIER PAR TON VRAI CV !
+-
+-Pour activer le bouton de téléchargement :
+-1. Exporte ton CV en PDF
+-2. Renomme-le exactement : CV.pdf
+-3. Glisse-le dans ce dossier public/
+-4. Supprime ce fichier CV_placeholder.txt
+-
+-Le bouton dans le Hero téléchargera automatiquement le fichier sous le nom :
+-"CV_Mohamed_Attahir_Diallo.pdf"

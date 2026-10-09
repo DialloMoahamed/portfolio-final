@@ -1,8 +1,23 @@
+import { useLocation, useNavigate } from "react-router-dom";
 import { NAV_LINKS } from "../data/navLinks";
+import { useLang } from "../i18n";
 
 export default function Nav({ active, scrolled, theme, onThemeToggle }) {
+  const { t, toggleLang } = useLang();
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const onHome = pathname === "/";
+
+  // Sur l'accueil : scroll vers la section. Ailleurs (pages blog) : retour à l'accueil puis scroll.
   const scroll = (id) => {
-    document.getElementById(id.toLowerCase())?.scrollIntoView({ behavior: "smooth" });
+    const target = id.toLowerCase();
+    if (onHome) {
+      document.getElementById(target)?.scrollIntoView({ behavior: "smooth" });
+      return;
+    }
+    if (target === "blog") { navigate("/blog"); return; }
+    navigate("/");
+    setTimeout(() => document.getElementById(target)?.scrollIntoView({ behavior: "smooth" }), 300);
   };
 
   const isDark = theme === "dark";
@@ -21,18 +36,29 @@ export default function Nav({ active, scrolled, theme, onThemeToggle }) {
               onClick={(e) => { e.preventDefault(); scroll(n); }}
               href={`#${n.toLowerCase()}`}
             >
-              {n}
+              {t(`nav.${n}`)}
             </a>
           </li>
         ))}
       </ul>
 
+      <div className="nav-tools">
+      {/* Bouton de langue : affiche la langue vers laquelle on bascule */}
+      <button
+        className="theme-toggle lang-toggle"
+        onClick={toggleLang}
+        aria-label={t("lang.switch")}
+        title={t("lang.switch")}
+      >
+        {t("lang.label")}
+      </button>
+
       {/* Toggle thème */}
       <button
         className="theme-toggle"
         onClick={onThemeToggle}
-        aria-label={isDark ? "Passer en mode clair" : "Passer en mode sombre"}
-        title={isDark ? "Mode clair" : "Mode sombre"}
+        aria-label={isDark ? t("theme.light") : t("theme.dark")}
+        title={isDark ? t("theme.light") : t("theme.dark")}
       >
         {isDark ? (
           /* Soleil */
@@ -54,6 +80,7 @@ export default function Nav({ active, scrolled, theme, onThemeToggle }) {
           </svg>
         )}
       </button>
+      </div>
     </nav>
   );
 }

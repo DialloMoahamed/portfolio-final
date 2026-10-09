@@ -1,16 +1,18 @@
 import useInView from "../hooks/useInView";
+import { useLang } from "../i18n";
 
 export default function About() {
+  const { t } = useLang();
   const [aboutRef, aboutVisible] = useInView();
 
   return (
     <section id="about" ref={aboutRef}>
             <div className={`fade-in${aboutVisible ? " visible" : ""}`}>
-              <div className="section-tag">About Me</div>
+              <div className="section-tag">{t("about.tag")}</div>
               <h2 className="section-title">
-                Crafting digital
-                <br />experiences with{" "}
-                <span style={{ color: "var(--accent)" }}>purpose</span>
+                {t("about.title1")}
+                <br />{t("about.title2")}{" "}
+                <span style={{ color: "var(--accent)" }}>{t("about.title3")}</span>
               </h2>
             </div>
     
@@ -20,13 +22,13 @@ export default function About() {
                   <div className="about-avatar">⚡</div>
                   <div className="about-text">
                     <p>
-                      I'm a <strong>front end developer</strong> with 2+ years of experience crafting polished web applications. Passionate about clean architecture and pixel-perfect interfaces.
+                      {t("about.p1a")} <strong>{t("about.p1b")}</strong> {t("about.p1c")}
                     </p>
                     <p>
-                      When I'm not coding, you'll find me exploring generative art, contributing to open-source, or obsessing over typography.
+                      {t("about.p2")}
                     </p>
                     <p style={{ marginBottom: 0 }}>
-                      Currently based in <strong>Niamey, Niger</strong> — open to remote opportunities worldwide.
+                      {t("about.p3a")} <strong>{t("about.p3b")}</strong> {t("about.p3c")}
                     </p>
                   </div>
                 </div>
@@ -35,10 +37,10 @@ export default function About() {
               <div className={`fade-in delay-2${aboutVisible ? " visible" : ""}`}>
                 <div className="stats-grid">
                   {[
-                    { n: "2+", l: "Years Experience" },
-                    { n: "30+", l: "Projects Shipped" },
-                    { n: "12+", l: "Happy Clients" },
-                    { n: "100%", l: "Commitment" },
+                    { n: "2+", l: t("about.stat1") },
+                    { n: "30+", l: t("about.stat2") },
+                    { n: "12+", l: t("about.stat3") },
+                    { n: "100%", l: t("about.stat4") },
                   ].map((s) => (
                     <div className="stat-item" key={s.l}>
                       <div className="stat-num">{s.n}</div>

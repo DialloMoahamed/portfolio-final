@@ -24,7 +24,9 @@ Portfolio personnel développé avec **React + Vite**, présentant mes projets, 
 - 🖱️ **Cursor personnalisé** — point + anneau avec effet d'inertie
 - ⏳ **Loader d'entrée** — animation `<MA/>` au chargement de la page
 - 📊 **Barre de progression** — scroll progress en haut de page
-- 📬 **Formulaire de contact** — intégration EmailJS, validation complète
+- 📬 **Formulaire de contact** — EmailJS (paquet npm), validation, anti-spam, messages d'erreur explicites
+- 📝 **Blog** — `/blog` et `/blog/:slug`, articles dans `src/data/posts.js`
+- 🗂️ **Projets filtrables** — Applications / Sites web / Apprentissage
 - 📄 **Téléchargement CV** — bouton direct vers le PDF
 - 🗺️ **Page 404 personnalisée** — effet glitch + redirection automatique
 - 📱 **Responsive** — adapté mobile, tablette et desktop
@@ -64,15 +66,24 @@ Le site est accessible sur `http://localhost:5173`
 
 ## ⚙️ Configuration EmailJS
 
-Pour activer le formulaire de contact, ouvre `src/sections/Contact.jsx` et renseigne tes clés :
+1. Crée un compte sur [emailjs.com](https://www.emailjs.com/), ajoute un **Email Service** (Gmail) et un **Email Template**.
+2. Dans le template, mets ton adresse dans le champ **To Email** et utilise les variables `{{name}}`, `{{email}}`, `{{title}}`, `{{message}}` (ou `{{from_name}}`, `{{from_email}}`, `{{subject}}`).
+3. Copie `.env.example` en `.env` et renseigne :
 
-```js
-const EMAILJS_SERVICE_ID  = "service_xxxxxxx";
-const EMAILJS_TEMPLATE_ID = "k1hodw9";
-const EMAILJS_PUBLIC_KEY  = "W0QvLbGOavk1E1P2c";
+```env
+VITE_EMAILJS_SERVICE_ID=service_xxxxxxx
+VITE_EMAILJS_TEMPLATE_ID=template_xxxxxxx
+VITE_EMAILJS_PUBLIC_KEY=xxxxxxxxxxxxxxxx
 ```
 
-Crée un compte gratuit sur [emailjs.com](https://www.emailjs.com/) si ce n'est pas encore fait.
+> L'ID d'un template EmailJS commence par `template_`. En production, ajoute les mêmes variables dans Vercel/Netlify, puis redéploie.
+> Dans EmailJS → Account → Security, autorise ton domaine si tu as activé la restriction.
+
+---
+
+## 📝 Ajouter un article de blog
+
+Ajoute un objet dans `src/data/posts.js` (slug, titre, extrait, `projects` = ids de `projects.js`, contenu en blocs `p` / `h` / `ul`). Il apparaît automatiquement sur `/blog`.
 
 ---
 
@@ -83,7 +94,7 @@ portfolio-final/
 ├── public/
 │   ├── favicon.svg         # Favicon avec initiales MA
 │   ├── og-image.png        # Image Open Graph (1200×630)
-│   └── CV.pdf              # ← Ajoute ton CV ici
+│   └── CV.pdf              # CV téléchargé par le bouton « Télécharger CV »
 ├── src/
 │   ├── components/
 │   │   ├── Cursor.jsx      # Curseur personnalisé

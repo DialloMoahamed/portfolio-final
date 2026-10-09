@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import useScrollSpy from "./hooks/useScrollSpy";
 import useTheme     from "./hooks/useTheme";
 
+import { LangProvider } from "./i18n";
 import Loader         from "./components/Loader";
 import Cursor         from "./components/Cursor";
 import ScrollProgress from "./components/ScrollProgress";
@@ -12,9 +13,12 @@ import Hero           from "./sections/Hero";
 import About          from "./sections/About";
 import Skills         from "./sections/Skills";
 import Projects       from "./sections/Projects";
+import Blog           from "./sections/Blog";
 import Contact        from "./sections/Contact";
 import Footer         from "./sections/Footer";
 import NotFound       from "./pages/NotFound";
+import BlogList       from "./pages/BlogList";
+import BlogPost       from "./pages/BlogPost";
 
 function Portfolio() {
   const activeSection = useScrollSpy();
@@ -35,6 +39,7 @@ function Portfolio() {
       <About />
       <Skills />
       <Projects />
+      <Blog />
       <Contact />
       <Footer />
     </>
@@ -46,7 +51,7 @@ export default function App() {
   const handleLoaded = useCallback(() => setLoaded(true), []);
 
   return (
-    <>
+    <LangProvider>
       {/* Cursor personnalisé — affiché partout */}
       <Cursor />
 
@@ -58,10 +63,12 @@ export default function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/"  element={<Portfolio />} />
+            <Route path="/blog" element={<BlogList />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="*"  element={<NotFound />} />
           </Routes>
         </BrowserRouter>
       </div>
-    </>
+    </LangProvider>
   );
 }
